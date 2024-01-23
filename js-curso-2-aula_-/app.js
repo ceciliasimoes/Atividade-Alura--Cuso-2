@@ -1,5 +1,6 @@
 
 let numeroSecreto = geraNumeroAleatorio();
+let contadorTentativas = 1;
 
 function exibirTexto(tag,texto){
     let campo = document.querySelector(tag);
@@ -13,7 +14,9 @@ function verificarChute(){
     let chute = document.querySelector('input').value;
     if (chute == numeroSecreto){
         exibirTexto('h1', 'Você Ganhou!');
-        exibirTexto('p','Parabéns! Você acertou!');
+        let palavraTentativa = 1 ? 'tentativa':'tentativas';
+        let mensagemFinal = `Parabéns! Você acertou em ${contadorTentativas} ${palavraTentativa}!`;
+        exibirTexto('p',mensagemFinal);
     } else{
         if(chute > numeroSecreto){
             exibirTexto('h1', 'Não foi dessa vez!');
@@ -22,9 +25,16 @@ function verificarChute(){
             exibirTexto('h1', 'Não foi dessa vez!');
             exibirTexto('p', 'O Número Secreto é maior que seu chute!');
         }
+        contadorTentativas++;
+        limparCampo();
     }
 }
 
 function geraNumeroAleatorio(){
     return parseInt(Math.random()*10+1)
+}
+
+function limparCampo(){
+    chute = document.querySelector('input');
+    chute.value = ' ';
 }
