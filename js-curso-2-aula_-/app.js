@@ -11,7 +11,18 @@ exibirTexto('h1','Jogo do Número Screto');
 
 function verificarChute(){
     let chute = document.querySelector('input').value;
-    console.log(chute == numeroSecreto);
+    if (chute == numeroSecreto){
+        exibirTexto('h1', 'Você Ganhou!');
+        exibirTexto('p','Parabéns! Você acertou!');
+    } else{
+        if(chute > numeroSecreto){
+            exibirTexto('h1', 'Não foi dessa vez!');
+            exibirTexto('p','O número secreto é menor que seu chute!');
+        }else {
+            exibirTexto('h1', 'Não foi dessa vez!');
+            exibirTexto('p', 'O Número Secreto é maior que seu chute!');
+        }
+    }
 }
 
 function geraNumeroAleatorio(){
