@@ -7,16 +7,26 @@ function exibirTexto(tag,texto){
     campo.innerHTML = texto;
 }
 
-exibirTexto('p','Escolha um número entre 1 e 10:');
-exibirTexto('h1','Jogo do Número Screto');
+function exibirMensagemInicial(){
+    exibirTexto('h1','Jogo do Número Screto');
+    exibirTexto('p','Escolha um número entre 1 e 10:');
+}
+
+exibirMensagemInicial();
+
 
 function verificarChute(){
+
     let chute = document.querySelector('input').value;
+
     if (chute == numeroSecreto){
+
         exibirTexto('h1', 'Você Ganhou!');
         let palavraTentativa = 1 ? 'tentativa':'tentativas';
         let mensagemFinal = `Parabéns! Você acertou em ${contadorTentativas} ${palavraTentativa}!`;
         exibirTexto('p',mensagemFinal);
+        document.getElementById('reiniciar').removeAttribute('disabled');
+
     } else{
         if(chute > numeroSecreto){
             exibirTexto('h1', 'Não foi dessa vez!');
@@ -31,10 +41,18 @@ function verificarChute(){
 }
 
 function geraNumeroAleatorio(){
-    return parseInt(Math.random()*10+1)
+    return parseInt(Math.random()*10+1);
 }
 
 function limparCampo(){
     chute = document.querySelector('input');
     chute.value = ' ';
+}
+
+function reiniciarJogo(){
+    numeroSecreto = geraNumeroAleatorio();
+    limparCampo();
+    contadorTentativas = 1;
+    exibirMensagemInicial();
+    document.getElementById('reiniciar').setAttribute('disabled',true);
 }
